@@ -1,5 +1,8 @@
 import pytest
+import pygame
+from pygame.locals import *
 from world import World as world
+from play import *
 
 class TestWorldClass:
 
@@ -117,5 +120,61 @@ class TestLargeWorldClass:
         assert len(self.world.food_coords) == 150
 
     def test_generate_map(self):
+        self.world.generate_map()
+        assert self.world.map != None
+
+class TestGameLoop:
+
+    def setup(self):
+        start_game()
+
+    def test_start_game(self):
+        assert pygame.get_init() == True
+    
+    def test_end_game(self):
+        end_game()
+        assert pygame.get_init() == False
+
+    def test_start_and_end_game(self):
+        assert pygame.get_init() == True
+        end_game()
+        assert pygame.get_init() == False
+
+
+class TestGameDisplay:
+
+    def setup(self):
+        start_game()
+        open_display()
+
+    def test_start_and_open_display(self):
+        assert pygame.display.get_init() == True
+
+    def test_open_and_close_display(self):
+        close_display()
+        assert pygame.display.get_init() == False
+
+
+
+
+class TestStartGameMakeWorld:
+
+    def setup(self):
+        start_game()
+        self.world = world()
+
+    
+    def test_start_game_create_world(self):
+        assert self.world.dimensions == (0,0)
+
+    def test_start_game_create_world_with_dimensions(self):
+        input = 'small'
+        self.world.generate_world(input)
+        assert self.world.sprite_size == (15,15)
+        assert self.world.dimensions == (50,50)
+
+    def test_start_game_create_world_map(self):
+        input = 'small'
+        self.world.generate_world(input)
         self.world.generate_map()
         assert self.world.map != None

@@ -1,6 +1,8 @@
 import pytest
 import pygame
 import random
+from pygame.locals import *
+
 #from pygame.sprite import Group
 
 # A world has a size
