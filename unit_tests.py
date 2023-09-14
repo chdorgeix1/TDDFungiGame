@@ -140,6 +140,13 @@ class TestGameLoop:
         end_game()
         assert pygame.get_init() == False
 
+    def test_create_display(self):
+        test_world = create_display(input)
+        assert isinstance(test_world, world) 
+
+    def test_create_display(self):
+        test_world = create_display(input)
+        assert isinstance(test_world, world) 
 
 class TestGameDisplay:
 
@@ -154,7 +161,20 @@ class TestGameDisplay:
         close_display()
         assert pygame.display.get_init() == False
 
+    def test_create_display_small(self):
+        input = 'small'
+        test_world = create_display(input)
+        assert isinstance(test_world, world) 
 
+    def test_create_display_medium(self):
+        input = 'medium'
+        test_world = create_display(input)
+        assert isinstance(test_world, world) 
+
+    def test_create_display_large(self):
+        input = 'large'
+        test_world = create_display(input)
+        assert isinstance(test_world, world) 
 
 
 class TestStartGameMakeWorld:
@@ -163,7 +183,6 @@ class TestStartGameMakeWorld:
         start_game()
         self.world = world()
 
-    
     def test_start_game_create_world(self):
         assert self.world.dimensions == (0,0)
 
