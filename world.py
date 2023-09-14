@@ -2,6 +2,8 @@ import pytest
 import pygame
 import random
 from pygame.locals import *
+from pygame.sprite import Group
+from pygame.sprite import Sprite
 
 #from pygame.sprite import Group
 
@@ -18,6 +20,8 @@ class World:
         self.dimensions = (0,0)
         self.sprite_size = (0,0)
         self.food_coords = []
+        self.terrain_coords = []
+        self.all_sprites = Group()
         self.map = None
 
     def set_dimensions(self,input):
@@ -45,6 +49,16 @@ class World:
             x = i
             y = random.randint(0,self.dimensions[1] - self.sprite_size[1])
             self.food_coords.append([x,y])
+
+    def generate_impass_terrain(self):
+        for i in range(0, self.dimensions[0]):
+            x = random.randint(0,self.dimensions[1] - self.sprite_size[1])
+            y = i
+            self.terrain_coords.append([x,y])
+
+    def generate_sprites(self):
+        self.all_sprites.add(Sprite())
+        #for food_sprites in self.food_coords:
 
     def generate_map(self):
         self.map = pygame.display.set_mode(self.dimensions)

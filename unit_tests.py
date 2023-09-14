@@ -3,6 +3,7 @@ import pygame
 from pygame.locals import *
 from world import World as world
 from play import *
+from pygame.sprite import Sprite
 
 class TestWorldClass:
 
@@ -80,10 +81,18 @@ class TestSmallWorldClass:
         self.world.generate_food()
         assert len(self.world.food_coords) == 50
 
+    def test_generate_random_impass_terrain(self):
+        self.world.generate_impass_terrain()
+        assert self.world.terrain_coords != []
+
+    def test_accurate_impass_terrain_count(self):
+        self.world.generate_impass_terrain()
+        assert len(self.world.terrain_coords) == 50
+
     def test_generate_map(self):
         self.world.generate_map()
         assert self.world.map != None
-    
+
 
 
 class TestMediumWorldClass:
@@ -99,6 +108,14 @@ class TestMediumWorldClass:
     def test_accurate_food_count(self):
         self.world.generate_food()
         assert len(self.world.food_coords) == 100
+
+    def test_generate_random_impass_terrain(self):
+        self.world.generate_impass_terrain()
+        assert self.world.terrain_coords != []
+
+    def test_accurate_impass_terrain_count(self):
+        self.world.generate_impass_terrain()
+        assert len(self.world.terrain_coords) == 100
 
     def test_generate_map(self):
         self.world.generate_map()
@@ -118,6 +135,14 @@ class TestLargeWorldClass:
     def test_accurate_food_count(self):
         self.world.generate_food()
         assert len(self.world.food_coords) == 150
+    
+    def test_generate_random_impass_terrain(self):
+        self.world.generate_impass_terrain()
+        assert self.world.terrain_coords != []
+
+    def test_accurate_impass_terrain_count(self):
+        self.world.generate_impass_terrain()
+        assert len(self.world.terrain_coords) == 150
 
     def test_generate_map(self):
         self.world.generate_map()
@@ -197,3 +222,30 @@ class TestStartGameMakeWorld:
         self.world.generate_world(input)
         self.world.generate_map()
         assert self.world.map != None
+
+
+class TestSpriteGeneration:
+
+    def setup(self):
+        self.world_small = world()
+        # self.world_medium = world()
+        # self.world_large = world()
+        self.world_small.generate_world('small')
+        # self.world_medium.generate_world('medium')
+        # self.world_large.generate_world('large')
+
+    def test_generate_empty_sprites(self):
+        assert self.world_small.all_sprites.sprites() == []
+
+    def test_add_sprite(self):
+        self.world_small.all_sprites.add(Sprite())
+        assert self.world_small.all_sprites.sprites() != []
+
+    def test_create_and_empty_sprite_group(self):
+        self.world_small.generate_sprites()
+        self.world_small.all_sprites.empty()
+        assert self.world_small.all_sprites.sprites() == []
+
+   # def test_generate_sprite(self):
+
+        #assert len(self.world_small.food_coords) + len(self.world_small.terrain_coords) == len(self.world_small.all_sprites
