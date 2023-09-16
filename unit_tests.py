@@ -246,6 +246,5 @@ class TestSpriteGeneration:
         self.world_small.all_sprites.empty()
         assert self.world_small.all_sprites.sprites() == []
 
-   # def test_generate_sprite(self):
-
-        #assert len(self.world_small.food_coords) + len(self.world_small.terrain_coords) == len(self.world_small.all_sprites
+    def test_generate_food_sprites(self):
+        assert len(self.world_small.food_sprites) == len(self.world_small.food_coords)
