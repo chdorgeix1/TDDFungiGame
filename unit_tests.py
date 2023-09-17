@@ -248,3 +248,6 @@ class TestSpriteGeneration:
 
     def test_generate_food_sprites(self):
         assert len(self.world_small.food_sprites) == len(self.world_small.food_coords)
+
+    def test_generate_terrain_sprites(self):
+        assert len(self.world_small.terrain_sprites) == len(self.world_small.terrain_coords)
