@@ -228,14 +228,16 @@ class TestSpriteGeneration:
 
     def setup(self):
         self.world_small = world()
-        # self.world_medium = world()
-        # self.world_large = world()
+        self.world_medium = world()
+        self.world_large = world()
         self.world_small.generate_world('small')
-        # self.world_medium.generate_world('medium')
-        # self.world_large.generate_world('large')
+        self.world_medium.generate_world('medium')
+        self.world_large.generate_world('large')
 
     def test_generate_empty_sprites(self):
         assert self.world_small.all_sprites.sprites() == []
+        assert self.world_medium.all_sprites.sprites() == []
+        assert self.world_large.all_sprites.sprites() == []
 
     def test_add_sprite(self):
         self.world_small.all_sprites.add(Sprite())
@@ -251,3 +253,5 @@ class TestSpriteGeneration:
 
     def test_generate_terrain_sprites(self):
         assert len(self.world_small.terrain_sprites) == len(self.world_small.terrain_coords)
+
+    def test_all_sprites
